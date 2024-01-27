@@ -4,11 +4,13 @@ from langchain.chains import LLMChain
 
 from third_party.linkedin_scrape import scrape_linkedin_profile
 from decouple import config
+from agents.linkedin_lookup_agent import lookup as linkedin_lookup_agent
 
 OPENAI_API_KEY = config("OPENAI_API_KEY")
+
 if __name__ == "__main__":
     print("Hello LangChain!")
-
+    linkedin_profile_url = linkedin_lookup_agent(name="Archana Devi Prabhu")
     summary_template = """
          given the Linkedin information {information} about a person from I want you to create:
          1. a short summary
@@ -18,7 +20,7 @@ if __name__ == "__main__":
     summary_prompt_template = PromptTemplate(
         input_variables=["information"], template=summary_template
     )
-    linkedin_profile_url = "gkjegan"
+
     llm = ChatOpenAI(
         temperature=0, model_name="gpt-3.5-turbo", openai_api_key=OPENAI_API_KEY
     )
