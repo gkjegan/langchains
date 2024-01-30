@@ -12,7 +12,10 @@ from decouple import config
 OPENAI_API_KEY = config("OPENAI_API_KEY")
 PINECONE_API_KEY = config("PINECONE_API_KEY")
 
-
+'''
+Works only with pinecone 2.2.4. so pip install pinecone-client==2.2.4
+TBD: Modify for pinecone-client 3.0 
+'''
 pinecone.init(
     api_key=PINECONE_API_KEY,
     environment="gcp-starter",
